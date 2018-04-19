@@ -1,21 +1,18 @@
-О программе
-----------
-pass
-
 Установка
 -----------
 ```
-$ git clone https://github.com/N0rdream/vk-countdown.git
-$ cd vk-countdown
+$ git clone https://github.com/N0rdream/countdown.git
+$ cd countdown
 ```
 
 Зависимости
 ----------    
-Для работы требуется версия Python не ниже 3.6.
+Для работы требуется версия Python не ниже 3.6.   
 Установку необходимых зависимостей можно осуществить, выполнив команду:
 ```
 $ pip install -r requirements.txt
 ```
+Кроме того, необходимо дополнительно установить RabbitMQ.  
 
 Конфигурирование и настройка
 ----------
@@ -28,7 +25,7 @@ $ pip install -r requirements.txt
 Как запустить
 ----------
 ```
-$ python app.py
+$ celery -A schedule worker -B -l info
 ```
 
 

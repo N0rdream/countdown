@@ -2,14 +2,16 @@ import os
 import sys
 import logging
 from dotenv import load_dotenv
-from countdown.helpers import get_tuple
-from countdown.timer import get_countdown
-from countdown.vk_requests import get_upload_url, upload_file, save_cover
-from countdown.editors import create_cover
+from .helpers import get_tuple
+from .timer import get_countdown
+from .vk_requests import get_upload_url, upload_file, save_cover
+from .editors import create_cover
+from celery import shared_task
 
 
-def main():
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+@shared_task(ignore_result=True)
+def update_cover():
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     MEDIA_DIR = os.path.join(BASE_DIR, 'media')
     load_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))
 
@@ -44,7 +46,3 @@ def main():
         msg = 'Got exception on main()'
         logging.exception(msg)
         sys.exit(msg)
-
-
-if __name__ == '__main__':
-    main()
