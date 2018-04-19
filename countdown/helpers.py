@@ -17,10 +17,12 @@ def get_word(num, days=False, hours=False, minutes=False):
     elif minutes:
         words = ('минута', 'минуты', 'минут')
     last_digit = num[-1]
-    if last_digit == '1':
-        return words[0]
-    if last_digit in ['2', '3', '4']:
-        return words[1]
+    num = int(num)
+    if num < 11 or num > 14:
+        if last_digit == '1':
+            return words[0]
+        if last_digit in ['2', '3', '4']:
+            return words[1]
     return words[2]
 
 
