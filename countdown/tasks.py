@@ -1,7 +1,6 @@
 import os
 import sys
 import logging
-from dotenv import load_dotenv
 from .helpers import get_tuple, get_words
 from .timer import get_countdown
 from .vk_requests import get_upload_url, upload_file, save_cover
@@ -13,8 +12,6 @@ from celery import shared_task
 def update_cover():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     MEDIA_DIR = os.path.join(BASE_DIR, 'media')
-    load_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))
-
     date_event = os.getenv('DATE_EVENT')
     cover_orginal_path = os.path.join(MEDIA_DIR, os.getenv('COVER_ORIGINAL_FILENAME'))
     cover_final_path = os.path.join(MEDIA_DIR, os.getenv('COVER_FINAL_FILENAME'))
@@ -29,14 +26,11 @@ def update_cover():
     access_token = os.getenv('VK_GROUP_ACCESS_TOKEN')
     api_version = os.getenv('VK_API_VERSION')
     log_dir = os.path.join(BASE_DIR, os.getenv('LOG_DIR'))
-
-
     logging.basicConfig(
         level=logging.INFO,
         filename=log_dir,
         format='[%(asctime)s] %(levelname).1s %(message)s',
         datefmt='%Y.%m.%d %H:%M:%S')
-
     try:
         nums = get_countdown(date_event)
         create_cover(

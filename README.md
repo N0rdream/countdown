@@ -27,7 +27,10 @@ $ pip install -r requirements.txt
 ```
 $ celery -A schedule worker -B -l info
 ```
-
+Кроме того, можно использользовать Docker-контейнеры:
+```
+$ docker-compose up --build -d
+```
 
 
 

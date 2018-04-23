@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  
+  mq:
+    image: rabbitmq:3
+  
+  countdown_beat:
+    build: ./
+    image: countdown
+    env_file: .env
+    command: celery -A schedule beat -b mq -l info
+    depends_on:
+      - mq
+
+  countdown_worker:
+    image: countdown
+    env_file: .env
+    command: celery -A schedule worker -b mq -l info
+    depends_on:
+      - mq
+      - countdown_beat
