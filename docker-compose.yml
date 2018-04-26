@@ -3,7 +3,9 @@ version: '3'
 services:
   
   mq:
-    image: rabbitmq:3
+    build:
+      context: .
+      dockerfile: Dockerfile-rabbitmq
   
   countdown_beat:
     build: ./
@@ -17,6 +19,15 @@ services:
     image: countdown
     env_file: .env
     command: celery -A schedule worker -b mq -l info
+    depends_on:
+      - mq
+      - countdown_beat
+  
+  flower:
+    image: countdown
+    command: flower -A schedule --broker=amqp://mq// --port=7777 --address=0.0.0.0
+    ports:
+      - 7777:7777
     depends_on:
       - mq
       - countdown_beat
