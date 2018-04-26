@@ -1,0 +1,12 @@
+__pycache__/
+.env
+.env-example
+README.md
+.DS_Store
+.pytest_cache/
+.gitignore
+celerybeat-schedule
+.git/
+commands
+logs
+media/
