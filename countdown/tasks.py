@@ -25,10 +25,9 @@ def update_cover():
     group_id = os.getenv('VK_GROUP_ID')
     access_token = os.getenv('VK_GROUP_ACCESS_TOKEN')
     api_version = os.getenv('VK_API_VERSION')
-    log_dir = os.path.join(BASE_DIR, os.getenv('LOG_DIR'))
     logging.basicConfig(
         level=logging.INFO,
-        filename=log_dir,
+        stream=sys.stdout,
         format='[%(asctime)s] %(levelname).1s %(message)s',
         datefmt='%Y.%m.%d %H:%M:%S')
     try:
@@ -43,7 +42,7 @@ def update_cover():
         upload_url = get_upload_url(group_id, access_token, api_version)
         vk_hash, vk_photo = upload_file(cover_final_path, upload_url)
         save_cover(vk_hash, vk_photo, access_token, api_version)
-    except (Exception, KeyboardInterrupt) as e:
+    except (Exception, KeyboardInterrupt):
         msg = 'Got exception on main()'
         logging.exception(msg)
         sys.exit(msg)

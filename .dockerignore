@@ -6,6 +6,4 @@ README.md
 .gitignore
 celerybeat-schedule
 .git/
-commands
-logs
 .env

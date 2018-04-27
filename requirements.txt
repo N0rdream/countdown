@@ -1,6 +1,6 @@
-celery==4.1.0
-Pillow==5.1.0
-pytest==3.5.0
-pytz==2018.4
-requests==2.18.4
+celery
+Pillow
+pytest
+pytz
+requests
 flower

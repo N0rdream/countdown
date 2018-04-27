@@ -12,6 +12,8 @@ services:
     image: countdown
     env_file: .env
     command: celery -A schedule beat -b mq -l info
+    volumes:
+      - /vagrant/test_docker/countdown:/countdown
     depends_on:
       - mq
 
@@ -19,6 +21,8 @@ services:
     image: countdown
     env_file: .env
     command: celery -A schedule worker -b mq -l info
+    volumes:
+      - /vagrant/test_docker/countdown:/countdown
     depends_on:
       - mq
       - countdown_beat

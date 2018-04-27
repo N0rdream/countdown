@@ -1,8 +1,6 @@
 __pycache__/
 .env
-logs
 media/
 celerybeat-schedule
 .pytest_cache/
 .DS_Store
-commands
