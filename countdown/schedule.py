@@ -1,6 +1,6 @@
 from celery import Celery
 from celery.schedules import crontab
-from countdown.tasks import update_cover
+from .tasks import update_cover
 
 
 app = Celery()

@@ -11,25 +11,21 @@ services:
     build: ./
     image: countdown
     env_file: .env
-    command: celery -A schedule beat -b mq -l info
-    volumes:
-      - /vagrant/test_docker/countdown:/countdown
+    command: celery -A countdown.schedule beat -b mq -l info
     depends_on:
       - mq
 
   countdown_worker:
     image: countdown
     env_file: .env
-    command: celery -A schedule worker -b mq -l info
-    volumes:
-      - /vagrant/test_docker/countdown:/countdown
+    command: celery -A countdown.schedule worker -b mq -l info
     depends_on:
       - mq
       - countdown_beat
   
   flower:
     image: countdown
-    command: flower -A schedule --broker=amqp://mq// --port=7777 --address=0.0.0.0
+    command: flower -A countdown.schedule --broker=amqp://mq// --port=7777 --address=0.0.0.0
     ports:
       - 7777:7777
     depends_on:

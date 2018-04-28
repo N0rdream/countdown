@@ -27,7 +27,6 @@ def update_cover():
     api_version = os.getenv('VK_API_VERSION')
     logging.basicConfig(
         level=logging.INFO,
-        stream=sys.stdout,
         format='[%(asctime)s] %(levelname).1s %(message)s',
         datefmt='%Y.%m.%d %H:%M:%S')
     try:
