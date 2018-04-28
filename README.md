@@ -25,15 +25,23 @@ $ pip install -r requirements.txt
 Как запустить
 ----------
 ```
-$ celery -A schedule worker -B -l info
+$ celery -A countdown.schedule worker -B -l info
 ```
 Кроме того, можно использользовать Docker-контейнеры:
 ```
 $ docker-compose up --build -d
 ```
-
-
-
+Monitoring
+------------
+Отслеживание задач можно осуществлять при помощи пакета Flower, выполнив команду:
+```
+$ flower -A countdown.schedule --port=7777 --address=0.0.0.0
+```
+При запуске приложения через Docker Flower запустится автоматически.  
+Далее перейдите по адресу в браузере:
+```
+http://localhost:7777
+```
 
 
 
