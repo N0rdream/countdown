@@ -3,9 +3,7 @@ version: '3'
 services:
   
   mq:
-    build:
-      context: .
-      dockerfile: Dockerfile-rabbitmq
+    image: rabbitmq:3-management
   
   countdown_beat:
     build: ./
